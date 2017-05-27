@@ -1,0 +1,8 @@
+{
+	"host":"localhost",
+	"user":"root",
+	"password":"esfera",
+	"prefix":"",
+	"database" : "savedollarstores_magento",
+	"web_url":"http://demo.js/"
+}

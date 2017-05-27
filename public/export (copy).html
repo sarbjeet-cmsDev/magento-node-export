@@ -1,0 +1,98 @@
+
+<div ng-controller="mCtrl" class="container- row" ng-if='eav'>
+	<div class="alert alert-danger" role="alert" ng-show="error.length">{{error}}</div>
+	<div class="col-md-12" style="max-width: 700px;margin: 0 auto;">
+		<table class="table table-bordered table-striped">
+			<tr>
+				<td>Website</td>
+				<td>
+					<select ng-model="_website">
+						<option ng-repeat="web in website" ng-value='web.website_id'>{{web.name}}</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td>Store</td>
+				<td>
+					<select ng-model="_store">
+						<option ng-repeat="str in store" ng-disabled='_website != str.website_id' ng-value='str.store_id'>{{str.code}}</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td>Fetch By</td>
+				<td>
+					<label>
+						<input type="radio" ng-value='0' selected ng-model="fetch_by" />	
+						Limit
+					</label>
+					<label>
+						<input type="radio" ng-value='1' ng-model="fetch_by" />
+						ID
+					</label>
+					
+				</td>
+			</tr>
+			<tr>
+				<td>Limit</td>
+				<td>
+					<input type="text" ng-model='offset'  ng-disabled='fetch_by == 1' placeholder="OFFSET" />
+					<input type="text" ng-model='limit' ng-disabled='fetch_by == 1' placeholder="LIMIT" />
+				</td>
+			</tr>
+			<tr>
+				<td>ID</td>
+				<td>
+					<input type="text" ng-model='entity_from' ng-disabled='fetch_by == 0' placeholder="from" />
+					<input type="text" ng-model='entity_to' ng-disabled='fetch_by == 0' placeholder="to"/>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2"> 
+					<ng-form class="row" name="eavForm" style=' max-height: 400px;overflow-y: scroll;'>
+
+						<div class="col-md-6" ng-repeat="eav in eav track by $index">
+							
+							<input  type="checkbox" 
+									ng-click="updateEavExport(eav)"
+									value='{{eav.attribute_id}}' 
+									name='export_eav' 
+									id='{{eav.attribute_id}}' 
+									ng-model="eav.checked"
+									ng-required="eav_export.length==0"> 
+
+							<label for='{{eav.attribute_id}}'>
+								{{eav.frontend_label}}
+							</label>
+						</div>
+
+						<div class="col-md-12 text-right">
+							
+						</div>
+
+					</ng-form>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<button 
+						type="submit" 
+						ng-click="export()"
+						ng-disabled="eavForm.$invalid"  
+						class="btn btn-success">
+						Export
+					</button>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" class="text-center">
+					<p ng-show="loading" ng-model="loading">Please Wait...</p>
+					<a ng-show='exporturl.length' ng-href='{{exporturl}}'>Download</a>
+				</td>
+			</tr>
+		</table>
+		
+		
+
+	</div>				
+</div>

@@ -1,0 +1,28 @@
+<div class="col-md-12" style="max-width: 500px;margin: 0 auto;">
+	<form ng-submit="submit()">
+		<table class="table table-bordered table-striped">
+			<tr>
+				<td><strong>User</strong></td>
+				<td>
+					<input type="text" ng-model='user' required />
+				</td>
+			</tr>
+			<tr>
+				<td><strong>Password</strong></td>
+				<td>
+					<input type="password" ng-model='password' required/>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" class="text-center">
+					<button type="submit" class="btn btn-danger">Login</button>
+				</td>
+			</tr>
+			<tr ng-show='error'>
+				<td colspan="2" class="text-center">
+					<p  ng-model='error'><span class="label label-danger">{{error}}</span></p>
+				</td>
+			</tr>
+		</table>
+	</form>
+</div>
